@@ -47,15 +47,11 @@ antigen bundle extract
 antigen bundle djui/alias-tips
 
 # Aliases cheatsheet. USAGE:
-#   aliases
-antigen bundle aliases
-
-# Adds aliases for frequent rsync commands. USAGE:
 #   acs
 #   acs <keyword>
-antigen bundle acs
+antigen bundle aliases
 
-# dds completion for the Kubernetes cluster manager, as well as some aliases for
+# Adds completion for the Kubernetes cluster manager, as well as some aliases for
 # common kubectl commands. 
 #   USAGE: see https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
 antigen bundle kubectl

@@ -144,6 +144,9 @@ alias tree='tree -a -I .git'
 # ENVIRONMENT VARIABLES
 ################################################################################
 
+# Set iTerm as the default terminal.
+TERM_PROGRAM="iTerm.app"
+
 # Elixir / Erlang
 ERLANG_OPENSSL_PATH="/usr/local/opt/openssl"
 ERL_AFLAGS="-kernel shell_history enabled"

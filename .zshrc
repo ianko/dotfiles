@@ -126,6 +126,7 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 ################################################################################
 # KEY BINDINGS
 ################################################################################
+
 z4h bindkey undo Ctrl+/   Shift+Tab # undo the last command line change
 z4h bindkey redo Option+/           # redo the last undone command line change
 
@@ -139,6 +140,16 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 ################################################################################
 
 alias tree='tree -a -I .git'
+
+# Delete a given line number in the known_hosts file.
+knownrm() {
+ re='^[0-9]+$'
+ if ! [[ $1 =~ $re ]] ; then
+   echo "error: line number missing" >&2;
+ else
+   sed -i '' "$1d" ~/.ssh/known_hosts
+ fi
+}
 
 ################################################################################
 # ENVIRONMENT VARIABLES

@@ -182,4 +182,3 @@ DOCKER_HOST='unix:///tmp/podman.sock'
 # Others
 PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/.kubectl-plugins:$PATH
-PATH="/usr/local/opt/openssl@1.1/bin":$PATH

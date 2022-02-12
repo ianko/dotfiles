@@ -1,0 +1,25 @@
+[user]
+# These values are not publicly available and are stored in ~/.gitconfig_private
+[github]
+  user = ianko
+[core]
+  editor = code
+  excludesfile = ~/.gitignore
+  autocrlf = input
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[init]
+  defaultBranch = master
+[credential]
+  helper = osxkeychain
+[push]
+  default = simple
+[difftool]
+  prompt = false
+[pull]
+  rebase = true
+[include]
+  path = ~/.gitconfig_private

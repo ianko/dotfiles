@@ -152,16 +152,16 @@ defaults write com.apple.BezelServices kDimTime -int 120
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
   # Show language menu in the top right corner of the boot screen
   # defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
-fi
+# fi
 
 ###############################################################################
 # Energy saving                                                               #
 ###############################################################################
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
+# if [[ "$RUN_AS_ROOT" = true ]]; then
   # Enable lid wakeup
   # pmset -a lidwake 1
 
@@ -198,7 +198,7 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
   # touch /private/var/vm/sleepimage
   # …and make sure it can’t be rewritten
   # chflags uchg /private/var/vm/sleepimage
-fi
+# fi
 
 ###############################################################################
 # Screen                                                                      #

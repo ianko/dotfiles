@@ -85,7 +85,7 @@ z4h load ohmyzsh/ohmyzsh/plugins/common-aliases
 z4h load ohmyzsh/ohmyzsh/plugins/safe-paste
 
 # Adds integration with asdf
-# z4h load ohmyzsh/ohmyzsh/plugins/asdf
+z4h load ohmyzsh/ohmyzsh/plugins/asdf
 
 # Adds completions for the Elixir's Mix build tool.
 z4h load ohmyzsh/ohmyzsh/plugins/mix

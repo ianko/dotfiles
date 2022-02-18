@@ -139,6 +139,11 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 # ALIASES
 ################################################################################
 
+# Flutter w/ FVM
+alias flutter="fvm flutter"
+alias dart="fvm dart"
+
+# tree (from homebrew)
 alias tree='tree -a -I .git'
 
 # Delete a given line number in the known_hosts file.
@@ -156,29 +161,29 @@ knownrm() {
 ################################################################################
 
 # Set iTerm as the default terminal.
-TERM_PROGRAM="iTerm.app"
+export TERM_PROGRAM="iTerm.app"
 
 # Elixir / Erlang
-ERLANG_OPENSSL_PATH="/usr/local/opt/openssl"
-ERL_AFLAGS="-kernel shell_history enabled"
-KERL_BUILD_DOCS=yes
-NO_PROXY=localhost,127.0.0.1,LOCALHOST
+export ERLANG_OPENSSL_PATH="/usr/local/opt/openssl"
+export ERL_AFLAGS="-kernel shell_history enabled"
+export KERL_BUILD_DOCS=yes
+export NO_PROXY=localhost,127.0.0.1,LOCALHOST
 
 # Flutter
-CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-PATH=$HOME/.flutter/bin:$PATH
-PATH=$HOME/.pub-cache/bin:$PATH
+export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+export PATH=$HOME/fvm/default/bin:$PATH
+export PATH=$HOME/.pub-cache/bin:$PATH
 
 # Ruby / GEM
-GEM_HOME=$HOME/.gem
-PATH=$GEM_HOME/bin:$PATH
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
 
 # Kubernetes
-KUBECONFIG=~/.kube/config:$(ls -d ~/.kube/config.d/* | python -c 'import sys; print(":".join([l.strip() for l in sys.stdin]).strip())')
+# export KUBECONFIG=~/.kube/config:$(ls -d ~/.kube/config.d/* | python -c 'import sys; print(":".join([l.strip() for l in sys.stdin]).strip())')
+# export PATH=$HOME/.kubectl-plugins:$PATH
 
 # Podman
-DOCKER_HOST='unix:///tmp/podman.sock'
+export DOCKER_HOST='unix:///tmp/podman.sock'
 
 # Others
-PATH=$HOME/.local/bin:$PATH
-PATH=$HOME/.kubectl-plugins:$PATH
+export PATH=$HOME/.local/bin:$PATH

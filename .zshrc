@@ -149,6 +149,10 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 alias flutter="fvm flutter"
 alias dart="fvm dart"
 
+# Replace docker with podman
+alias docker=podman
+alias docker-compose=podman-compose
+
 # tree (from homebrew)
 alias tree='tree -a -I .git'
 
@@ -183,9 +187,6 @@ export PATH=$HOME/.pub-cache/bin:$PATH
 # Kubernetes
 # export KUBECONFIG=~/.kube/config:$(ls -d ~/.kube/config.d/* | python -c 'import sys; print(":".join([l.strip() for l in sys.stdin]).strip())')
 # export PATH=$HOME/.kubectl-plugins:$PATH
-
-# Podman
-export DOCKER_HOST='unix:///tmp/podman.sock'
 
 # Others
 export PATH=$HOME/.local/bin:$PATH

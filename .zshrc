@@ -90,6 +90,9 @@ z4h load ohmyzsh/ohmyzsh/plugins/asdf
 # Adds completions for the Elixir's Mix build tool.
 z4h load ohmyzsh/ohmyzsh/plugins/mix
 
+# This plugin adds completion for CocoaPods. 
+z4h load ohmyzsh/ohmyzsh/plugins/pod
+
 # Adds completion for the Kubernetes cluster manager, as well as some aliases for
 # common kubectl commands. 
 #   USAGE: see https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
@@ -108,6 +111,9 @@ z4h load ohmyzsh/ohmyzsh/plugins/aliases
 ################################################################################
 # LOAD AND CONFIG
 ################################################################################
+
+# load asdf
+/opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # Autoload functions.
 autoload -Uz zmv
@@ -174,10 +180,6 @@ export CHROME_EXECUTABLE="/Applications/Brave Browser.app/Contents/MacOS/Brave B
 export PATH=$HOME/fvm/default/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 
-# Ruby / GEM
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
-
 # Kubernetes
 # export KUBECONFIG=~/.kube/config:$(ls -d ~/.kube/config.d/* | python -c 'import sys; print(":".join([l.strip() for l in sys.stdin]).strip())')
 # export PATH=$HOME/.kubectl-plugins:$PATH
@@ -187,3 +189,4 @@ export DOCKER_HOST='unix:///tmp/podman.sock'
 
 # Others
 export PATH=$HOME/.local/bin:$PATH
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"

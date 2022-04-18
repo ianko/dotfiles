@@ -34,7 +34,7 @@
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
     dir                     # current directory
-    vcs                     # git status
+    kubecontext             # current kubernetes context (https://kubernetes.io/)
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
@@ -53,13 +53,13 @@
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     fvm                     # flutter version management (https://github.com/leoafarias/fvm)
     anaconda                # conda environment (https://conda.io/)
-    kubecontext             # current kubernetes context (https://kubernetes.io/)
     terraform               # terraform workspace (https://www.terraform.io)
     aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     context                 # user@hostname
     nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+    vcs                     # git status
     # terraform_version     # terraform version (https://www.terraform.io)
     # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     # pyenv                   # python environment (https://github.com/pyenv/pyenv)
@@ -491,7 +491,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_VCS_PREFIX='%248Fon '
+  # typeset -g POWERLEVEL9K_VCS_PREFIX='%248Fon '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
@@ -685,7 +685,7 @@
 
   # Erlang version from asdf.
   typeset -g POWERLEVEL9K_ASDF_ERLANG_FOREGROUND=9
-  typeset -g POWERLEVEL9K_ASDF_ERLANG_VISUAL_IDENTIFIER_EXPANSION='[e]'
+  # typeset -g POWERLEVEL9K_ASDF_ERLANG_VISUAL_IDENTIFIER_EXPANSION='[e]'
   # typeset -g POWERLEVEL9K_ASDF_ERLANG_SHOW_ON_UPGLOB='*.foo|*.bar'
 
 
@@ -1224,7 +1224,7 @@
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show kubecontext.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|fluxctl|stern'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='infra|k|kustomize|kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|fluxctl|stern'
 
   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
   # different contexts.
@@ -1253,11 +1253,16 @@
   #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
   #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
   typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-      # '*prod*'  PROD    # These values are examples that are unlikely
-      # '*test*'  TEST    # to match your needs. Customize them as needed.
-      '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=134
-  # typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+      '*prod*'    PROD    # These values are examples that are unlikely
+      # '*staging*' STG     # These values are examples that are unlikely
+      # '*test*'    TEST    # to match your needs. Customize them as needed.
+      '*'         DEFAULT)
+  
+  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_FOREGROUND=9
+  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_VISUAL_IDENTIFIER_EXPANSION=$'\UFD31'
+  
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=45
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION=$'\UFD31'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
   # segment. Parameter expansions are very flexible and fast, too. See reference:
@@ -1306,7 +1311,7 @@
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Custom prefix.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%248Fat '
+  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%248Fat '
 
   #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
   # Show aws only when the command you are typing invokes one of these tools.

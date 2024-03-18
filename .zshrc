@@ -91,7 +91,7 @@ z4h load ohmyzsh/ohmyzsh/plugins/asdf
 z4h load ohmyzsh/ohmyzsh/plugins/mix
 
 # This plugin adds completion for CocoaPods. 
-z4h load ohmyzsh/ohmyzsh/plugins/pod
+# z4h load ohmyzsh/ohmyzsh/plugins/pod
 
 # Adds completion for the Kubernetes cluster manager, as well as some aliases for
 # common kubectl commands. 
@@ -113,7 +113,8 @@ z4h load ohmyzsh/ohmyzsh/plugins/aliases
 ################################################################################
 
 # load asdf
-/opt/homebrew/opt/asdf/libexec/asdf.sh
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 # Autoload functions.
 autoload -Uz zmv
@@ -128,6 +129,9 @@ compdef _directories md
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+# increase file size limit
+ulimit -n 10240
 
 ################################################################################
 # KEY BINDINGS
@@ -155,6 +159,9 @@ alias docker-compose=podman-compose
 
 # tree (from homebrew)
 alias tree='tree -a -I .git'
+
+# fuck
+eval $(thefuck --alias)
 
 # Delete a given line number in the known_hosts file.
 knownrm() {

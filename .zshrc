@@ -149,6 +149,9 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 # ALIASES
 ################################################################################
 
+# GitHub Copilot aliases
+eval "$(gh copilot alias -- zsh)"
+
 # Flutter w/ FVM
 alias flutter="fvm flutter"
 alias dart="fvm dart"
@@ -173,6 +176,11 @@ knownrm() {
  fi
 }
 
+# Configure bat
+# Use bat to colorize help text (--help)
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias cat='bat --paging=never'
+
 ################################################################################
 # ENVIRONMENT VARIABLES
 ################################################################################
@@ -180,10 +188,25 @@ knownrm() {
 # Set iTerm as the default terminal.
 export TERM_PROGRAM="iTerm.app"
 
+# Configure bat 
+# set theme (available: bat --list-themes)
+export BAT_THEME="SynthWave 84"
+# use bat to colorize man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Elixir / Erlang
-export ERLANG_OPENSSL_PATH="/usr/local/opt/openssl"
+export CC="/usr/bin/gcc -I$(brew --prefix unixodbc)/include"
+export LDFLAGS="-L$(brew --prefix unixodbc)/lib"
+# export ERLANG_OPENSSL_PATH="$(brew --prefix openssl@3)"
+export ERLANG_OPENSSL_PATH="$(brew --prefix openssl@1.1)"
 export ERL_AFLAGS="-kernel shell_history enabled"
 export KERL_BUILD_DOCS=yes
+export JAVAC="/usr/bin/javac"
+export WX_CONFIG="/opt/homebrew/bin/wx-config"
+# export KERL_CONFIGURE_OPTIONS="--with-javac=$JAVAC --with-wx-config=$WX_CONFIG"
+# export KERL_CONFIGURE_OPTIONS="--with-javac=$JAVAC"
+# export KERL_CONFIGURE_OPTIONS="--with-javac=$JAVAC --with-ssl=$ERLANG_OPENSSL_PATH"
+export KERL_CONFIGURE_OPTIONS="--with-ssl=$ERLANG_OPENSSL_PATH --without-wx --without-javac"
 export NO_PROXY=localhost,127.0.0.1,LOCALHOST
 
 # Flutter
@@ -196,5 +219,11 @@ export PATH=$HOME/.pub-cache/bin:$PATH
 # export PATH=$HOME/.kubectl-plugins:$PATH
 
 # Others
+
 export PATH=$HOME/.local/bin:$PATH
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export PATH=$HOME/go/bin:$PATH
+export PATH="/opt/homebrew/opt/openssl@3/bin":$PATH
+export PATH="/usr/local/opt/sqlite/bin":$PATH
+export PATH="/opt/homebrew/opt/libpq/bin":$PATH
+export PATH="/opt/homebrew/opt/openjdk/bin":$PATH
+

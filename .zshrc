@@ -227,3 +227,65 @@ export PATH="/usr/local/opt/sqlite/bin":$PATH
 export PATH="/opt/homebrew/opt/libpq/bin":$PATH
 export PATH="/opt/homebrew/opt/openjdk/bin":$PATH
 
+################################################################################
+# GIT FUNCTIONS
+################################################################################
+
+# GitHub Copilot aliases
+eval "$(gh copilot alias -- zsh)"
+
+# Enhanced git branch cleanup using GitHub CLI
+git-prune() {
+    echo "🧹 Cleaning up branches using GitHub CLI..."
+    
+    # Prune remote tracking branches
+    git remote prune origin
+    
+    # Get merged and closed PRs, then delete their local branches
+    gh pr list --state merged --limit 100 --json headRefName | \
+        jq -r '.[].headRefName' | \
+        while read branch; do
+            if git show-ref --verify --quiet refs/heads/$branch; then
+                echo "Deleting merged PR branch: $branch"
+                git branch -D "$branch"
+            fi
+        done
+    
+    # Clean up branches whose remotes are gone
+    git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads | \
+        awk '$2 == "[gone]" {print $1}' | \
+        while read branch; do
+            echo "Deleting branch with deleted remote: $branch"
+            git branch -D "$branch"
+        done
+    
+    echo "✅ Branch cleanup complete!"
+}
+
+# Dry run version to see what would be deleted without actually deleting
+git-prune-dry-run() {
+    echo "🔍 DRY RUN - Showing what would be deleted..."
+    
+    echo "\n📡 Remote tracking branches that would be pruned:"
+    git remote prune origin --dry-run
+    
+    DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
+    echo "\n🌿 Local merged branches that would be deleted:"
+    git branch --merged $DEFAULT_BRANCH | \
+        grep -v "^\*" | \
+        grep -v "^[[:space:]]*$DEFAULT_BRANCH$" | \
+        grep -v "^[[:space:]]*main$" | \
+        grep -v "^[[:space:]]*master$" | \
+        grep -v "^[[:space:]]*develop$" | \
+        while read branch; do
+            if [[ -n "$branch" ]]; then
+                echo "  Would delete: $branch"
+            fi
+        done
+    
+    echo "\n🗑️  Branches with deleted remotes that would be deleted:"
+    git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads | \
+        awk '$2 == "[gone]" {print "  Would delete: " $1}'
+    
+    echo "\n✅ This was a dry run - no branches were actually deleted"
+}
